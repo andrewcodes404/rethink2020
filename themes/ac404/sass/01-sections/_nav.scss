@@ -1,0 +1,152 @@
+.s-nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 50px;
+}
+
+.s-nav {
+  display: flex;
+  padding: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+
+  &__logo {
+    width: 100px;
+    height: 75px;
+  }
+
+  &__menu {
+    ul {
+      display: flex;
+      align-items: center;
+      border: 1px solid yellow;
+      margin-bottom: 0;
+    }
+    li {
+      font-size: 17px;
+      line-height: 0.88;
+      letter-spacing: 2.07px;
+      text-align: center;
+      font-weight: 500;
+      list-style: none;
+
+      a {
+        color: black;
+      }
+      margin-right: 40px;
+    }
+  }
+}
+
+// HAMBURGER BTN --- HAMBURGER BTN --- HAMBURGER BTN ---
+.nav-mob-cont {
+  position: absolute;
+  z-index: 2;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+
+  display: flex;
+  justify-content: space-between;
+
+  @media (min-width: $break-tablet) {
+    top: 25px;
+    left: 25px;
+    right: 25px;
+  }
+  @media (min-width: $break-desktop) {
+    display: none;
+  }
+}
+
+.nav-mob-logo {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  @media (min-width: $break-tablet) {
+    width: 300px;
+  }
+}
+
+.hamburger-cont {
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+}
+
+.menu-btn {
+  font-size: 30px;
+  cursor: pointer;
+
+  @media (min-width: $break-tablet) {
+    font-size: 37px;
+  }
+
+  @media (min-width: $break-desktop) {
+    display: none;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  animation-name: fadeOut;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.fa-bars {
+}
+
+.fa-times {
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+.current-menu-item {
+  a,
+  a:link,
+  a:visited,
+  a:active {
+    color: darkblue;
+  }
+}
