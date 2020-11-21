@@ -1,0 +1,221 @@
+.nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $black;
+}
+
+.nav {
+  display: flex;
+  padding: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+
+  &__logo {
+    width: 160px;
+    min-width: 160px;
+    svg {
+      width: 100%;
+
+      .a {
+        transition: fill 0.4s;
+      }
+      &:hover {
+        .a {
+          fill: $yellow;
+        }
+      }
+    }
+  }
+
+  @keyframes slide-down {
+    from {
+      max-height: 0;
+    }
+    to {
+      max-height: calc(100vh - 80px);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      max-height: calc(100vh - 80px);
+    }
+    to {
+      max-height: 0;
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    left: 0;
+    max-height: 0;
+    background-color: rgba($black, 0.8);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+
+    &--show {
+      height: 100%;
+      animation: slide-down 0.6s forwards;
+    }
+
+    &--hide {
+      height: 100%;
+      animation: slide-up 0.6s forwards;
+    }
+
+    @media (min-width: 980px) {
+      position: static;
+      height: auto;
+      background-color: transparent;
+      overflow: initial;
+      max-height: initial;
+    }
+
+    ul {
+      margin-bottom: 0;
+      @media (min-width: 980px) {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+      }
+    }
+    li {
+      font-weight: 500;
+      list-style: none;
+      line-height: 1;
+      margin-bottom: 0;
+      cursor: pointer;
+      @media (min-width: 980px) {
+        display: inline;
+        @include font-size(16);
+      }
+
+      //bold for New for 2021 li
+      + .page-item-85 {
+        a {
+          font-weight: bold;
+        }
+      }
+
+      a {
+        @include font-size(30);
+        color: $white;
+        text-decoration: none;
+        white-space: nowrap;
+        margin-right: 10px;
+
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        transition: color 0.4s background-color 0.4s;
+
+        &:hover {
+          color: $black;
+          background-color: $yellow;
+
+          @media (min-width: 980px) {
+            color: $green;
+            background-color: $black;
+          }
+        }
+
+        @media (min-width: 980px) {
+          @include font-size(16);
+          &:after {
+            content: "|";
+            margin-left: 10px;
+          }
+
+          &:hover {
+            &:after {
+              content: "|";
+              color: $white;
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+      &:last-child {
+        a {
+          margin-right: 0px;
+          &:after {
+            content: "";
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .current-menu-item {
+      a,
+      a:link,
+      a:visited {
+        color: $yellow;
+
+        @media (min-width: 980px) {
+          &:after {
+            content: "|";
+            color: $white;
+          }
+        }
+      }
+
+      a:hover {
+        color: $black;
+      }
+
+      &:last-child {
+        a {
+          &:after {
+            content: "";
+          }
+        }
+      }
+      @media (min-width: 980px) {
+        a:hover {
+          color: $yellow;
+        }
+      }
+    }
+  }
+
+  &__button {
+    color: $green;
+    width: 30px;
+    cursor: pointer;
+    transition: color 0.4s;
+    &:hover {
+      color: $yellow;
+    }
+
+    &--show {
+      display: block;
+    }
+
+    &--hide {
+      display: none;
+    }
+
+    @media (min-width: 980px) {
+      display: none;
+    }
+  }
+
+  &__hamburger {
+  }
+
+  &__close {
+  }
+}

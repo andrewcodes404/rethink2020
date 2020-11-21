@@ -2,8 +2,9 @@
 
 ### on setup
 
- `./gulpfile`
-change this to your local url
+ `wp-content/themes/ac404/tasks/gulpfile.js`
+
+change this to use your local url
 
 ``` js
 function serve() {
