@@ -1,7 +1,7 @@
-wp-content/uploads
-wp-content/upgrade
-wp-content/mu-plugins/*
-wp-content/themes/symbol-work/tasks/package-lock.json
+uploads
+upgrade
+mu-plugins/*
+themes/symbol-work/tasks/package-lock.json
 
 # ignore node dependency directories (used by grunt)
 node_modules/
