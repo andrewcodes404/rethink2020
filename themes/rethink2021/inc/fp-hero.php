@@ -15,7 +15,7 @@
       <img src="<?php echo get_template_directory_uri(); ?>/images/jpg/hero-logo-white.png" alt="" />
     </div>
 
-    <h1>
+    <h1 class="h1-front-page">
       08 - 09 JUNE 2021 <br /> Hall 1, HKCEC, WanChai, Hong Kong
     </h1>
 

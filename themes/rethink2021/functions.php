@@ -22,7 +22,7 @@ function wpdocs_enqueue_custom_admin_style() {
   wp_register_style( 'custom_wp_admin_css', get_template_directory_uri() . '/style/style-min.css', false, '1.0.0' );
   wp_enqueue_style( 'custom_wp_admin_css' );
 }
-add_action( 'admin_enqueue_scripts', 'wpdocs_enqueue_custom_admin_style' );
+// add_action( 'admin_enqueue_scripts', 'wpdocs_enqueue_custom_admin_style' );
 
 // Scripts
 require_once( get_template_directory() . '/functions/scripts.php' );
