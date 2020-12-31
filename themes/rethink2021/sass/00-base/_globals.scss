@@ -4,6 +4,45 @@
 
 body {
 }
+
+/**
+ * @section Breakpoints
+ * These values will not show up in content, but can be queried by JavaScript to know which breakpoint is active.
+ * Add or remove as many breakpoints as you like.
+ */
+
+body:before {
+  content: "navMobile";
+  display: none;
+  visibility: hidden;
+}
+
+// @media (min-width: 20em) {
+//   body:before {
+//     content: "small";
+//   }
+// }
+
+@media (min-width: 980px) {
+  body:before {
+    content: "navDesktop";
+  }
+}
+
+// @media (min-width: 60em) {
+//   body:before {
+//     content: "large";
+//   }
+// }
+
+// @media (min-width: 80em) {
+//   body:before {
+//     content: "xlarge";
+//   }
+// }
+
+// end breakpoints --- end breakpoints --- end breakpoints ---
+
 .body {
   height: 100%;
   min-height: 100vh;

@@ -27,11 +27,12 @@
 
 const hamburger = document.querySelector('#hamburger')
 const closeBtn = document.querySelector('#closeBtn')
-const menu = document.querySelector('#nav__menu')
+const menu = document.querySelector('#nav__menu-mobile')
 
 hamburger.addEventListener('click', () => {
-  menu.classList.remove('nav__menu--hide')
-  menu.classList.add('nav__menu--show')
+  console.log(' 🎈');
+  menu.classList.remove('nav__menu-mobile--hide')
+  menu.classList.add('nav__menu-mobile--show')
 
   hamburger.classList.remove('nav__button--show')
   hamburger.classList.add('nav__button--hide')
@@ -41,8 +42,8 @@ hamburger.addEventListener('click', () => {
 
 
 closeBtn.addEventListener('click', () => {
-  menu.classList.remove('nav__menu--show')
-  menu.classList.add('nav__menu--hide')
+  menu.classList.remove('nav__menu-mobile--show')
+  menu.classList.add('nav__menu-mobile--hide')
 
   closeBtn.classList.remove('nav__button--show')
   closeBtn.classList.add('nav__button--hide')
@@ -50,6 +51,34 @@ closeBtn.addEventListener('click', () => {
   hamburger.classList.add('nav__button--show')
 })
 
+
+// desktop dropdown --- desktop dropdown --- desktop dropdown --- 
+// desktop dropdown --- desktop dropdown --- desktop dropdown --- 
+// desktop dropdown --- desktop dropdown --- desktop dropdown --- 
+
+
+const navDesktop = document.querySelector('#nav__menu-desktop')
+
+const menusWithSubMenu = navDesktop.querySelectorAll('.menu-item-has-children')
+
+menusWithSubMenu.forEach(menuWithSubMenu => {
+  menuWithSubMenu.addEventListener('mouseover', function () {
+    const link = this.firstElementChild
+    const submenu = this.querySelector("ul")
+    const submenuHeight = submenu.scrollHeight + "px"
+    link.style.backgroundColor = "green"
+    submenu.style.maxHeight = submenuHeight;
+  })
+
+
+  menuWithSubMenu.addEventListener('mouseout', function () {
+    const link = this.firstElementChild
+    const submenu = this.querySelector("ul")
+    submenu.style.maxHeight = "0";
+    link.style.backgroundColor = "transparent"
+  })
+
+});
 
 
 

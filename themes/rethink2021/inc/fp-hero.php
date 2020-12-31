@@ -23,22 +23,21 @@
     <div class="fp-btns">
 
       <div class="fp-btn fp-btn--green" data-aos="fade-in" data-aos-delay="500" data-aos-duration="2000">
-        <a href="https://forms.gle/35b6xTmNWggW7Bfs5" target="_blank" rel="noopener noreferrer">
+        <a href="https://enviro.wantech.com.hk/general-enquiry" target="_blank" rel="noopener noreferrer">
           Attend
         </a>
       </div>
 
       <div class="fp-btn fp-btn--yellow" data-aos="fade-in" data-aos-delay="500" data-aos-duration="2000">
 
-        <a href="https://mailchi.mp/rethink-event.com/newsletter" target="_blank" rel="noopener noreferrer">
+        <a href="https://enviro.wantech.com.hk/newsletter-subscription" target="_blank" rel="noopener noreferrer">
           Newsletter
         </a>
       </div>
 
       <div class="fp-btn fp-btn--green" data-aos="fade-in" data-aos-delay="500" data-aos-duration="2000">
 
-        <a href="https://rethink-event.us20.list-manage.com/subscribe?u=689c9c9b54458f75cbd8a723f&id=cc903b4d8a"
-          target="_blank" rel="noopener noreferrer">
+        <a href="https://enviro.wantech.com.hk/sponsorship-enquiry" target="_blank" rel="noopener noreferrer">
           Sponsor
         </a>
       </div>
