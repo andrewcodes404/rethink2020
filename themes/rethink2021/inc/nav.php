@@ -9,7 +9,7 @@
     </div>
 
 
-    <div class="nav__menu" id="nav__menu">
+    <div class="nav__menu-mobile" id="nav__menu-mobile">
       <?php 
         wp_nav_menu( array(
             'menu' => 'navigation', 
@@ -17,6 +17,20 @@
         ) );
    ?>
     </div>
+
+
+    <div class="nav__menu-desktop" id="nav__menu-desktop">
+      <?php 
+        wp_nav_menu( array(
+            'menu' => 'navigation', 
+            'container' => 'ul'
+        ) );
+   ?>
+    </div>
+
+
+
+
 
     <div class="nav__hamburger nav__button nav__button--show" id="hamburger">
       <?php echo file_get_contents( get_theme_file_uri( 'images/svg/hamburger.svg' ) ); ?>
