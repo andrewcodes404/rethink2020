@@ -1,25 +1,3 @@
-// Blocks --- Blocks --- Blocks --- 
-// Blocks --- Blocks --- Blocks --- 
-// Blocks --- Blocks --- Blocks --- 
-
-// function addListBlockClassName(settings, name) {
-//   if (name !== 'core/list') {
-//     return settings;
-//   }
-//   return lodash.assign({}, settings, {
-//     supports: lodash.assign({}, settings.supports, {
-//       className: true
-//     }),
-//   });
-// }
-
-// wp.hooks.addFilter(
-//   'blocks.registerBlockType',
-//   'my-plugin/class-names/list-block',
-//   addListBlockClassName
-// );
-
-
 // Navigation --- Navigation --- Navigation --- 
 // Navigation --- Navigation --- Navigation --- 
 // Navigation --- Navigation --- Navigation --- 
@@ -30,7 +8,7 @@ const closeBtn = document.querySelector('#closeBtn')
 const menu = document.querySelector('#nav__menu-mobile')
 
 hamburger.addEventListener('click', () => {
-  console.log(' 🎈');
+
   menu.classList.remove('nav__menu-mobile--hide')
   menu.classList.add('nav__menu-mobile--show')
 
@@ -95,4 +73,50 @@ if (h2s) {
     h2.setAttribute("data-aos", "h2-heading");
 
   });
-} 
+}
+
+
+// modals --- modals --- modals --- modals --- 
+// modals --- modals --- modals --- modals --- 
+// modals --- modals --- modals --- modals --- 
+
+const logos = document.querySelectorAll('.s-card__logo')
+
+logos.forEach(logo => {
+  logo.addEventListener('click', function () {
+    this.nextElementSibling.classList.add("s-modal-wrapper--show")
+  })
+});
+
+
+const modalWrappers = document.querySelectorAll('.s-modal-wrapper')
+
+
+modalWrappers.forEach(modalWrapper => {
+  modalWrapper.addEventListener('click', function (event) {
+    event.stopPropagation();
+    this.classList.remove("s-modal-wrapper--show")
+  })
+});
+
+const modals = document.querySelectorAll('.s-modal')
+
+modals.forEach(modal => {
+  modal.addEventListener('click', function (event) {
+    event.stopPropagation();
+    // this.classList.remove("s-modal-wrapper--show")
+  })
+});
+
+
+const modalCloseBtns = document.querySelectorAll('.s-modal__close-btn')
+
+modalCloseBtns.forEach(modalCloseBtn => {
+  modalCloseBtn.addEventListener('click', function (event) {
+    event.stopPropagation();
+    this.parentElement.parentElement.classList.remove("s-modal-wrapper--show")
+  })
+});
+
+
+

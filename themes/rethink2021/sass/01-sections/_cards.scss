@@ -1,0 +1,145 @@
+.s-cards-wrapper {
+}
+
+.s-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  @media (min-width: $break-desktop) {
+    margin-bottom: 60px;
+  }
+}
+
+.s-card {
+  &__logo {
+    height: 200px;
+    width: 200px;
+
+    margin: 0 20px 20px 0;
+
+    cursor: pointer;
+
+    img {
+      transition: transform 0.4s;
+      object-fit: scale-down;
+      width: 100%;
+      height: 100%;
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.s-modal-wrapper {
+  position: fixed;
+  top: 0;
+  // bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 6;
+  height: 100vh;
+  background-color: rgba(black, 0.5);
+  justify-content: center;
+  align-items: flex-start;
+  display: none;
+  overflow: auto;
+  cursor: pointer;
+  &--show {
+    display: flex;
+  }
+}
+
+.s-modal {
+  background-color: #fff;
+  width: 90%;
+  max-width: 800px;
+  padding: 50px;
+  margin: 150px 0;
+  position: relative;
+  z-index: 1;
+  cursor: auto;
+  &__close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+
+    color: $green;
+    transition: transform 1s;
+    &__svg {
+      width: 30px;
+      height: 30px;
+
+      svg {
+        color: $green;
+        transition: color 0.4s;
+      }
+    }
+
+    &:hover {
+      transform: rotate(90deg);
+      svg {
+        color: $yellow;
+      }
+    }
+  }
+
+  &__logo {
+    width: 200px;
+    height: 200px;
+    margin: 0 0 30px;
+    img {
+      object-fit: scale-down;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  &__social {
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+    svg {
+      width: 100%;
+      height: 100%;
+      color: $green;
+      transition: 0.4s;
+    }
+
+    &:hover {
+      svg {
+        color: $yellow;
+      }
+    }
+    &--linkedin {
+      width: unset;
+      display: flex;
+      align-items: flex-end;
+      a {
+        margin-bottom: 3px;
+        line-height: 1;
+        @include font-size(18);
+        font-weight: bold;
+        color: $green;
+        transition: 0.4s;
+        &:hover {
+          color: $yellow;
+        }
+      }
+    }
+  }
+
+  &__desc {
+  }
+}
