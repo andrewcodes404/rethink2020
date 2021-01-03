@@ -58,6 +58,7 @@
     cursor: pointer;
     transition: 0.4s;
     svg {
+      color: $green;
       transition: 0.4s;
       width: 30px;
       height: 30px;
@@ -69,12 +70,7 @@
 
     &:hover {
       svg {
-        fill,
-        path,
-        circle,
-        line {
-          stroke: $yellow;
-        }
+        color: yellow;
       }
     }
   }
