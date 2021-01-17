@@ -3,9 +3,9 @@
 Template Name: On Demand
 */
 get_header(); ?>
-
-<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 <div class="content-layout">
+    <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+
     <h1><?php the_title()?></h1>
     <?php the_content(); ?>
 
@@ -16,8 +16,8 @@ get_header(); ?>
 
 
     <?php 
-// the query
-$the_query = new WP_Query( array( 'category_name' => 'rt20ondemand' )); ?>
+        // the query
+        $the_query = new WP_Query( array( 'category_name' => 'rt20ondemand' )); ?>
 
 
     <div class="s-blogs">
@@ -51,12 +51,23 @@ $the_query = new WP_Query( array( 'category_name' => 'rt20ondemand' )); ?>
         <!-- End of the main loop -->
     </div>
 
+    <div class="pagination">
+
+        <div class="nav-previous alignleft"><?php previous_posts_link( '&#8592;  newer posts' ); ?></div>
+        <div class="nav-next alignright"><?php next_posts_link( 'older posts  &#8594;' ); ?></div>
+
+    </div>
+
 
     <?php wp_reset_postdata(); ?>
 
     <?php else : ?>
     <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
     <?php endif; ?>
-</div>
 
+
+
+
+</div>
+</div>
 <?php get_footer(); ?>

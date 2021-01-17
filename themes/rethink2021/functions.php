@@ -41,7 +41,14 @@ add_action('add_meta_boxes', 'my_remove_wp_seo_meta_box_sponsers', 100);
 
 
 
+//Remove category from posts home
 
+function exclude_category( $query ) {
+	if ( $query->is_home() && $query->is_main_query() ) {
+	$query->set( 'cat', '-21' );
+	}
+	}
+add_action( 'pre_get_posts', 'exclude_category' );
 
 
 /**

@@ -51,17 +51,6 @@ function apd_allowed_block_types( $allowed_blocks ) {
         'acf/sponsors-showcase',
 
 
-
-
-
-
-
-
-
-
-
-        'acf/test',
-    
         // the wp-blocks
         'core/heading',
         'core/paragraph',
@@ -418,7 +407,7 @@ function apd_register_blocks()
             'mode' => 'preview',
             'example'  => array(
                 'attributes' => array(
-                    'mode' => 'preview',
+                    'mode' => 'edit',
                     'carousel-items' => array(
                         
                     )
@@ -434,7 +423,7 @@ function apd_register_blocks()
             'icon' => 'images-alt2',
             'keywords' => array('carousel', 'slider'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'edit',
           
         ));
 
@@ -446,7 +435,7 @@ function apd_register_blocks()
             'icon' => 'images-alt2',
             'keywords' => array('carousel', 'slider'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'edit',
           
         ));
 
@@ -459,7 +448,7 @@ function apd_register_blocks()
             'icon' => 'images-alt2',
             'keywords' => array('carousel', 'slider'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'edit',
           
         ));
 
