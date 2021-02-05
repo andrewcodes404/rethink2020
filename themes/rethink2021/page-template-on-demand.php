@@ -13,19 +13,24 @@ get_header(); ?>
     <p><?php esc_html_e( 'Sorry, no posts matched your criteria.' ); ?></p>
     <?php endif; ?>
 
+    <?php wp_reset_postdata(); ?>
 
 
     <?php 
-        // the query
-        $the_query = new WP_Query( array( 'category_name' => 'rt20ondemand' )); ?>
+        $temp = $wp_query;
+        $wp_query= null;
+        $wp_query = new WP_Query();
+        $wp_query->query('cat=21&showposts=9&orderby=menu_order'.'&paged='.$paged);
+    ?>
+
 
 
     <div class="s-blogs">
 
-        <?php if ( $the_query->have_posts() ) : ?>
+        <?php if ( $wp_query->have_posts() ) : ?>
 
         <!-- Start of the main loop. -->
-        <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+        <?php while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
 
         <!-- the rest of your theme's main loop -->
         <div class="s-blog">
