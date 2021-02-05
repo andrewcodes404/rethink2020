@@ -2,25 +2,15 @@
 
 <div class="content-layout">
 
-  <h1>Speakers</h1>
+    <h1>Speakers</h1>
 
-  <!-- 
-  <?php  get_template_part('template-parts/card-modal', null,  array( 
-    'data'  => array(
-      'post_type'   => 'speaker-items',
-      'title'       => 'Speakers' 
-  ))) ?> -->
+    <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
+    <?php the_content(); ?>
 
-
-  <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-
-
-  <?php the_content(); ?>
-
-  <?php endwhile; else : ?>
-  <p><?php esc_html_e( 'Sorry, no posts matched your criteria.' ); ?></p>
-  <?php endif; ?>
+    <?php endwhile; else : ?>
+    <p><?php esc_html_e( 'Sorry, no posts matched your criteria.' ); ?></p>
+    <?php endif; ?>
 
 
 </div>

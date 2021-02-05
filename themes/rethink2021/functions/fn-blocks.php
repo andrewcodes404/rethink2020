@@ -1,25 +1,12 @@
 <?php
-// https://www.advancedcustomfields.com/resources/blocks/
 
-
-// Remove the inbuilt block admin styles
-
-// function remove_guten_wrapper_styles( $settings ) {
-//     unset($settings['styles'][0]);
-
-//     return $settings;
-// }
-
-// add_filter( 'block_editor_settings' , 'remove_guten_wrapper_styles' );
-
-
-//TODO: doesnt work 👇🏻... but i want it to 
-// add_theme_support( 'disable-custom-font-sizes' );
 
 // Allow style for the block admin editor
-add_theme_support( 'editor-styles' );
-// Enque that stylesheet
-add_editor_style( get_template_directory_uri() . '/style/style.min.css' );
+// Get your styles into the block editor
+add_action( 'enqueue_block_editor_assets', function() {
+	wp_enqueue_style( 'all style for admin', get_stylesheet_directory_uri() . "/style/style.min.css", false, '1.0', 'all' );
+	wp_enqueue_script('tiny-slider_init', get_template_directory_uri() . '/style/deny-list-blocks.js', '', '', true);
+} );
 
 
 add_filter( 'allowed_block_types', 'apd_allowed_block_types' );
@@ -41,41 +28,38 @@ function apd_allowed_block_types( $allowed_blocks ) {
         'acf/partners-event-partner',
         'acf/partners-comm-partner',
         'acf/partners-ngo-partner',
-        'acf/partners-event-supporter',
+        'acf/partners-supporting-org',
         'acf/partners-sus-supplier',
         'acf/partners-media-partner',
 
+        'acf/partners-green',
+        'acf/partners-strategic',
+        'acf/partners-insight',
+        'acf/partners-charity',
+        
         'acf/sponsors-tier1',
         'acf/sponsors-tier2',
         'acf/sponsors-tier3',
         'acf/sponsors-showcase',
+        
 
 
-
-
-
-
-
-
-
-
-
-        'acf/test',
-    
         // the wp-blocks
         'core/heading',
         'core/paragraph',
         'core/list',
         'core/image',
-        // 'core/code',
+        'core/embed',
+        'core/code',
         'core/quote',
         // 'core/video',
-        'core-embed/youtube',
+        // 'core/embed[3]',
         // 'core/audio',
         'core/separator',
         // 'core/spacer',
     );
 }
+
 
 function create_block_category( $categories, $post ) {
 	return array_merge(
@@ -143,27 +127,94 @@ function apd_register_blocks()
         // Partners --- Partners --- Partners --- Partners --- 
         // Partners --- Partners --- Partners --- Partners --- 
 
-        // co-organiser
-        // sus-partner
-        // content-partner
-        // corp-supporter
-        // event-partner
-        // comm-partner
-        // ngo-partner
-        // event-supporter
-        // sus-supplier
-        // media-partner
-        
-        // Co-Organiser
-        // Sustainability Partner
-        // Content Partner
-        // Corporate Supporter
-        // Event Partner
-        // Community Partner
-        // NGO Partner
-        // Event Supporter
-        // Sustainable Supplier
-        // Media Partner
+        // coOrganiser : Co-Organiser
+        // green : Green Finance Partner
+        // susPartner : Sustainability Partner
+        // contentPartner : Content Partner
+        // strategic : Strategic Partner
+        // insight : Insight & Strategy Partner
+        // corpSupporter : Corporate Supporter
+        // charity : Charity Partners
+        // ngoPartner : NGO Partner
+        // commPartner : Community Partner
+        // supportingOrg : Supporting Organisation
+        // mediaPartner : Media Partner
+        // susSupplier : Sustainable Supplier
+
+
+        acf_register_block(array(
+            'name' => 'partners-charity',
+            'title' => __('Charity Partners'),
+            'render_template'   => get_template_directory() . '/blocks/b-partners--charity.php',
+            'category' => 'partner-blocks',
+            'icon' => 'groups',
+            'keywords' => array('partners'),
+            'post_types' => array('post', 'page'),
+            'mode' => 'preview',
+            'example'  => array(
+                'attributes' => array(
+                    'mode' => 'preview',
+                )
+            )
+        ));
+
+
+
+        acf_register_block(array(
+            'name' => 'partners-insight',
+            'title' => __('Insight & Strategy Partners'),
+            'render_template'   => get_template_directory() . '/blocks/b-partners--insight.php',
+            'category' => 'partner-blocks',
+            'icon' => 'groups',
+            'keywords' => array('partners'),
+            'post_types' => array('post', 'page'),
+            'mode' => 'preview',
+            'example'  => array(
+                'attributes' => array(
+                    'mode' => 'preview',
+                )
+            )
+        ));
+
+
+
+
+        acf_register_block(array(
+            'name' => 'partners-strategic',
+            'title' => __('Strategic Partners'),
+            'render_template'   => get_template_directory() . '/blocks/b-partners--strategic.php',
+            'category' => 'partner-blocks',
+            'icon' => 'groups',
+            'keywords' => array('partners'),
+            'post_types' => array('post', 'page'),
+            'mode' => 'preview',
+            'example'  => array(
+                'attributes' => array(
+                    'mode' => 'preview',
+                )
+            )
+        ));
+
+
+
+        acf_register_block(array(
+            'name' => 'partners-green',
+            'title' => __('Green Finance Partners'),
+            'render_template'   => get_template_directory() . '/blocks/b-partners--green.php',
+            'category' => 'partner-blocks',
+            'icon' => 'groups',
+            'keywords' => array('partners'),
+            'post_types' => array('post', 'page'),
+            'mode' => 'preview',
+            'example'  => array(
+                'attributes' => array(
+                    'mode' => 'preview',
+                )
+            )
+        ));
+
+
+
       
         acf_register_block(array(
             'name' => 'partners-co-organiser',
@@ -244,6 +295,24 @@ function apd_register_blocks()
                 )
             )
         ));
+
+        acf_register_block(array(
+            'name' => 'partners-supporting-org',
+            'title' => __('Supporting Organisations'),
+            'render_template'   => get_template_directory() . '/blocks/b-partners--supporting-org.php',
+            'category' => 'partner-blocks',
+            'icon' => 'groups',
+            'keywords' => array('partners'),
+            'post_types' => array('post', 'page'),
+            'mode' => 'preview',
+            'example'  => array(
+                'attributes' => array(
+                    'mode' => 'preview',
+                )
+            )
+        ));
+
+
         acf_register_block(array(
             'name' => 'partners-comm-partner',
             'title' => __('Community Partners'),
@@ -274,21 +343,7 @@ function apd_register_blocks()
                 )
             )
         ));
-        acf_register_block(array(
-            'name' => 'partners-event-supporter',
-            'title' => __('Event Partners'),
-            'render_template'   => get_template_directory() . '/blocks/b-partners--event-supporter.php',
-            'category' => 'partner-blocks',
-            'icon' => 'groups',
-            'keywords' => array('partners'),
-            'post_types' => array('post', 'page'),
-            'mode' => 'preview',
-            'example'  => array(
-                'attributes' => array(
-                    'mode' => 'preview',
-                )
-            )
-        ));
+
         acf_register_block(array(
             'name' => 'partners-sus-supplier',
             'title' => __('Sustainable Suppliers'),
@@ -415,10 +470,10 @@ function apd_register_blocks()
             'icon' => 'images-alt2',
             'keywords' => array('carousel', 'slider'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'edit',
             'example'  => array(
                 'attributes' => array(
-                    'mode' => 'preview',
+                    'mode' => 'edit',
                     'carousel-items' => array(
                         
                     )
@@ -434,7 +489,7 @@ function apd_register_blocks()
             'icon' => 'images-alt2',
             'keywords' => array('carousel', 'slider'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'edit',
           
         ));
 
@@ -446,7 +501,7 @@ function apd_register_blocks()
             'icon' => 'images-alt2',
             'keywords' => array('carousel', 'slider'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'edit',
           
         ));
 
@@ -459,7 +514,7 @@ function apd_register_blocks()
             'icon' => 'images-alt2',
             'keywords' => array('carousel', 'slider'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'edit',
           
         ));
 
