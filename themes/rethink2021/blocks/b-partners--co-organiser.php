@@ -3,5 +3,4 @@
       'post_type'   => 'partner-items',
       'meta_key'		=> 'ranking',
       'meta_value'	=> 'coOrganiser',
-      'title'       => 'Co Organiser' 
   ))) ?>

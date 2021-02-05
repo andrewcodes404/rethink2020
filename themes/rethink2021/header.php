@@ -2,33 +2,33 @@
 <html lang="en-US">
 
 <head>
-  <title>
-    <?php bloginfo('name');?> | <?php is_front_page() ? bloginfo('description') : wp_title('');?>
-  </title>
+    <title>
+        <?php bloginfo('name');?> | <?php is_front_page() ? bloginfo('description') : wp_title('');?>
+    </title>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96559774-20"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-96559774-20"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
 
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-  gtag('config', 'UA-96559774-20');
-  </script>
+    gtag('config', 'UA-96559774-20');
+    </script>
 
-  </script>
+    </script>
 
-  <?php wp_head();?>
+    <?php wp_head();?>
 
 </head>
 
-<body <?php body_class("body"); ?>>
-  <?php include "inc/nav.php";?>
+<body <?php $post_slug = $post->post_name;  body_class("body $post_slug"); ?>>
+    <?php include "inc/nav.php";?>

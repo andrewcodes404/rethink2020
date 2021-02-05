@@ -21,6 +21,10 @@ if (carouselsSpeakers) {
 
     autoplay: true,
     autoplayButtonOutput: false,
+    autoplayTimeout: 1500,
+
+    loop: true,
+    rewind: false,
 
 
     responsive: {
@@ -46,9 +50,9 @@ if (carouselsPartners) {
   var slider = tns({
     container: '.b-carousel--partners',
     items: 1,
-    swipeAngle: false,
+    // swipeAngle: false,
     speed: 600,
-
+    slideBy: 1,
     nav: false,
     controls: true,
     controlsPosition: "top",
@@ -57,7 +61,10 @@ if (carouselsPartners) {
 
     autoplay: true,
     autoplayButtonOutput: false,
+    autoplayTimeout: 1500,
 
+    loop: true,
+    rewind: false,
 
     responsive: {
 
@@ -93,6 +100,10 @@ if (carouselsSponsors) {
 
     autoplay: true,
     autoplayButtonOutput: false,
+    autoplayTimeout: 1500,
+
+    loop: true,
+    rewind: false,
 
 
     responsive: {
@@ -129,6 +140,10 @@ if (carouselsAdvCom) {
 
     autoplay: true,
     autoplayButtonOutput: false,
+    autoplayTimeout: 1500,
+
+    loop: true,
+    rewind: false,
 
 
     responsive: {
