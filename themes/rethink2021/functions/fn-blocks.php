@@ -127,6 +127,8 @@ function apd_register_blocks()
         // Partners --- Partners --- Partners --- Partners --- 
         // Partners --- Partners --- Partners --- Partners --- 
 
+        // 13 partner types
+        
         // coOrganiser : Co-Organiser
         // green : Green Finance Partner
         // susPartner : Sustainability Partner
@@ -150,7 +152,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -168,7 +170,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -187,7 +189,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -205,12 +207,8 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
-            'example'  => array(
-                'attributes' => array(
-                    'mode' => 'preview',
-                )
-            )
+            'mode' => 'auto',
+         
         ));
 
 
@@ -224,7 +222,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -241,7 +239,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -258,7 +256,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -273,7 +271,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -288,7 +286,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -304,7 +302,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -321,7 +319,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -336,12 +334,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
-            'example'  => array(
-                'attributes' => array(
-                    'mode' => 'preview',
-                )
-            )
+            'mode' => 'auto',
         ));
 
         acf_register_block(array(
@@ -352,7 +345,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',
@@ -367,7 +360,7 @@ function apd_register_blocks()
             'icon' => 'groups',
             'keywords' => array('partners'),
             'post_types' => array('post', 'page'),
-            'mode' => 'preview',
+            'mode' => 'auto',
             'example'  => array(
                 'attributes' => array(
                     'mode' => 'preview',

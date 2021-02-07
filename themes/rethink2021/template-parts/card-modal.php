@@ -9,16 +9,23 @@
  
   if ( $the_query->have_posts() ) : ?>
 
+
 <div class="s-cards-wrapper  s-cards-wrapper--<?php echo $args['data']['meta_value']?>">
 
-    <div class="s-cards s-cards--<?php echo $args['data']['meta_value']?>">
+    <?php if (is_admin()) {
+        echo '<p class="s-cards-wrapper__hint"> <code >hint: this is the ' .  $args["data"]["meta_value"] . ' block</code></p>';
+    }
+    ?>
+
+    <div
+        class="s-cards s-cards--<?php echo $args['data']['meta_value']?> s-cards--<?php the_field('pick_a_size_for_the_logos') ?>">
 
         <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
         <?php $post_id = get_the_ID();?>
 
         <div class="s-card">
 
-            <div class="s-card__logo">
+            <div class="s-card-logo s-card__logo">
 
                 <?php 
           $image = get_field('image', $post_id);
@@ -34,7 +41,7 @@
 
                     <div class="s-modal__close-btn">
                         <div class="s-modal__close-btn__svg">
-                            <?php echo file_get_contents( get_theme_file_uri( 'images/svg/close2.svg' ) ); ?>
+                            <?php echo file_get_contents(  get_template_directory() . '/images/svg/close2.svg'  ); ?>
                         </div>
                     </div>
 
@@ -59,7 +66,7 @@
                         <?php if( get_field('linkedin', $post_id) ): ?>
                         <div class="s-modal__social">
                             <a href="<?php the_field('linkedin'); ?>" target="_blank" rel="noopener noreferrer">
-                                <?php echo file_get_contents( get_theme_file_uri( 'images/svg/linkedin.svg' ) ); ?>
+                                <?php echo file_get_contents( get_template_directory() . '/images/svg/linkedin.svg' ) ; ?>
                             </a>
                         </div>
                         <?php endif; ?>
@@ -67,7 +74,7 @@
                         <?php if( get_field('facebook', $post_id) ): ?>
                         <div class="s-modal__social">
                             <a href="<?php the_field('facebook'); ?>" target="_blank" rel="noopener noreferrer">
-                                <?php echo file_get_contents( get_theme_file_uri( 'images/svg/facebook.svg' ) ); ?>
+                                <?php echo file_get_contents( get_template_directory() . '/images/svg/facebook.svg' ) ; ?>
                             </a>
                         </div>
                         <?php endif; ?>
@@ -75,7 +82,7 @@
                         <?php if( get_field('twitter', $post_id) ): ?>
                         <div class="s-modal__social">
                             <a href="<?php the_field('twitter'); ?>" target="_blank" rel="noopener noreferrer">
-                                <?php echo file_get_contents( get_theme_file_uri( 'images/svg/twitter.svg' ) ); ?>
+                                <?php echo file_get_contents( get_template_directory() . '/images/svg/twitter.svg' ) ; ?>
                             </a>
                         </div>
                         <?php endif; ?>
@@ -83,7 +90,7 @@
                         <?php if( get_field('instagram', $post_id) ): ?>
                         <div class="s-modal__social">
                             <a href="<?php the_field('instagram'); ?>" target="_blank" rel="noopener noreferrer">
-                                <?php echo file_get_contents( get_theme_file_uri( 'images/svg/insta.svg' ) ); ?>
+                                <?php echo file_get_contents( get_template_directory() . '/images/svg/insta.svg' ) ; ?>
                             </a>
                         </div>
                         <?php endif; ?>
