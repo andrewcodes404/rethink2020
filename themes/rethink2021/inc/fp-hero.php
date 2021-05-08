@@ -48,6 +48,13 @@
 
         </div>
 
+        <div class="fp-co-org">
+            <p>co-organised by</p>
+            <div class="fp-co-org__logo">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/png/BEC-logo.png" alt="">
+            </div>
+        </div>
+
     </div>
 
 

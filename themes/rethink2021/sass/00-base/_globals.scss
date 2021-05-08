@@ -3,6 +3,7 @@
 }
 
 body {
+  position: relative;
 }
 
 /**
@@ -50,48 +51,61 @@ body:before {
   flex-direction: column;
 }
 
-img,
-svg {
+img {
   width: 100%;
-  height: 0 auto;
+  height: auto;
 }
 
 // using bodyclass() page slug
 // using bodyclass() page slug
 // using bodyclass() page slug
 
-.bectheatre {
+.bec-theatre {
   h1 {
     text-decoration-color: $bectheatre;
   }
 }
 
-.sustainabletransformation {
+.sustainable-transformation {
   h1 {
     text-decoration-color: $sustainabletransformation;
   }
 }
 
-.sustainableresources {
+.sustainable-resources {
   h1 {
     text-decoration-color: $sustainableresources;
   }
 }
 
-.sustainablepartnerships {
+.sustainable-partnerships {
   h1 {
     text-decoration-color: $sustainablepartnerships;
   }
 }
 
-.sustainablecommunities {
+.sustainable-communities {
   h1 {
     text-decoration-color: $sustainablecommunities;
   }
 }
 
-.changemakers {
+.change-makers {
   h1 {
     text-decoration-color: $changemakers;
   }
+}
+
+.wp-block-image {
+  margin: 30px auto 40px;
+
+  @media (min-width: $break-desktop) {
+    margin: 45px auto 55px;
+  }
+}
+
+hr,
+.wp-block-separator {
+  height: 1px;
+  border: none;
 }

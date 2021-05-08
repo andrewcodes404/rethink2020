@@ -51,6 +51,13 @@ function posts_order_wpse_91866()
 }
 
 
+//ACF 
+
+// create options page
+if( function_exists('acf_add_options_page') ) {
+	acf_add_options_page();
+}
+
 
 // Import more functions
 

@@ -120,3 +120,45 @@ modalCloseBtns.forEach(modalCloseBtn => {
 
 
 
+
+//home-page pop-up
+//home-page pop-up
+//home-page pop-up
+//home-page pop-up
+
+const popUpWrapper = document.querySelector('#odoo-pop-wrapper')
+
+if (popUpWrapper) {
+
+  if (localStorage.getItem('popState') != 'shown') {
+    setTimeout(() => {
+      popUpWrapper.classList.add('odoo-pop-wrapper__show')
+    }, 20000);
+  }
+
+  popUpWrapper.addEventListener('click', (e) => {
+    e.stopPropagation()
+    popUpWrapper.classList.remove('odoo-pop-wrapper__show')
+  })
+
+}
+
+
+// oddo-form
+// oddo-form
+// oddo-form
+// oddo-form
+// oddo-form
+
+function resizeIframe(obj) {
+  obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+}
+
+const oddoForms = document.querySelectorAll('.odoo-form')
+if (oddoForms) {
+  oddoForms.forEach(oddoForm => {
+    oddoForm.style.height = oddoForm.scrollHeight + 'px';
+  });
+
+}
+
