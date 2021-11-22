@@ -3,4 +3,5 @@
       'post_type'   => 'partner-items',
       'meta_key'		=> 'ranking',
       'meta_value'	=> 'green',
+      'card_type'   => 'partner'
   ))) ?>

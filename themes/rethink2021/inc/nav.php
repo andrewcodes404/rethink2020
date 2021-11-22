@@ -1,3 +1,6 @@
+<div class="nav-fake">
+
+</div>
 <div class="nav-wrapper">
 
     <nav class="nav">

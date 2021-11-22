@@ -45,7 +45,16 @@
 										<label for="records_per_request"><?php _e('Limit export to', 'wp_all_export_plugin');?></label> <input type="text" name="split_large_exports_count" class="wp_all_export_sub_input" style="width: 50px;" value="<?php echo esc_attr($post['split_large_exports_count']) ?>" /> <?php _e('records per file', 'wp_all_export_plugin'); ?>															
 									</div>																				
 								</span>			
-							</div>		
+							</div>
+                            <div class="input" style="margin:5px 0px;">
+                                <input type="hidden" name="allow_client_mode" value="0"/>
+                                <input type="checkbox" disabled="disabled" id="allow_client_mode" name="allow_client_mode"
+                                       value="1" <?php echo $post['allow_client_mode'] ? 'checked="checked"' : '' ?> />
+                                <label for="allow_client_mode"><?php _e('Allow non-admins to run this export in Client Mode', 'wp_all_export_plugin') ?></label>
+                                <span>
+                                    <a href="#help" class="wpallexport-help" style="position: relative; top: 0;" title="<?php _e('When enabled, users with access to Client Mode will be able to run this export and download the export file. Go to All Export > Settings to give users access to Client Mode. <br><br><strong>Upgrade to the Pro edition of WP All Export to use this option.</strong>'); ?>">?</a>
+							    </span>
+                            </div>
 							<br>
 							<hr>
 							<p style="text-align:right;">

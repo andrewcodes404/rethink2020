@@ -3,7 +3,7 @@
 Plugin Name: WP All Export
 Plugin URI: http://www.wpallimport.com/upgrade-to-wp-all-export-pro/?utm_source=export-plugin-free&utm_medium=wp-plugins-page&utm_campaign=upgrade-to-pro
 Description: Export any post type to a CSV or XML file. Edit the exported data, and then re-import it later using WP All Import.
-Version: 1.2.7
+Version: 1.2.8
 Author: Soflyy
 */
 
@@ -686,6 +686,9 @@ else {
 
 			if ( $installed_ver == PMXE_VERSION ) return true;
 
+            // Declare variable to avoid nuisance notices when charset and collate aren't set.
+            $charset_collate = '';
+
 			if ( ! empty($wpdb->charset))
 				$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
 			if ( ! empty($wpdb->collate))
@@ -883,14 +886,23 @@ else {
 			return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') ? true : false ;
 		}
 
-        public static function encode( $value ){
-            return base64_encode(md5(AUTH_SALT) . $value . md5(md5(AUTH_SALT)));
+        /**
+         * @param $value
+         * @return string
+         */
+        public static function encode($value){
+            $salt = defined('AUTH_SALT') ? AUTH_SALT : wp_salt();
+            return base64_encode(md5($salt) . $value . md5(md5($salt)));
         }
 
-        public static function decode( $encoded ){
-            return preg_match('/^[a-f0-9]{32}$/', $encoded) ? $encoded : str_replace(array(md5(AUTH_SALT), md5(md5(AUTH_SALT))), '', base64_decode($encoded));
+        /**
+         * @param $encoded
+         * @return mixed
+         */
+        public static function decode($encoded){
+            $salt = defined('AUTH_SALT') ? AUTH_SALT : wp_salt();
+            return preg_match('/^[a-f0-9]{32}$/', $encoded) ? $encoded : str_replace(array(md5($salt), md5(md5($salt))), '', base64_decode($encoded));
         }
-
 
         /**
          * Replace last occurence of string

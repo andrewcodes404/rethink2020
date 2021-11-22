@@ -3,5 +3,6 @@
       'post_type'   => 'partner-items',
       'meta_key'		=> 'ranking',
       'meta_value'	=> 'commPartner',
-      'title'       => 'Sustainability Partner' 
+      'title'       => 'Sustainability Partner',
+      'card_type'   => 'partner'
   ))) ?>

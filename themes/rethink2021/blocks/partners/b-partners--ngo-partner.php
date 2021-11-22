@@ -3,5 +3,6 @@
       'post_type'   => 'partner-items',
       'meta_key'		=> 'ranking',
       'meta_value'	=> 'ngoPartner',
-      'title'       => 'NGO Partner' 
+      'title'       => 'NGO Partner',
+      'card_type'   => 'partner'
   ))) ?>

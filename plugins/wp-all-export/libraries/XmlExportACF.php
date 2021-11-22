@@ -701,8 +701,9 @@ if ( ! class_exists('XmlExportACF') )
 									);
 
 									$acfs[$element_name][] = $element_name . '_' . $sub_field_name;
-									$article[$element_name . '_' . $sub_field_name] = ($preview) ? trim(preg_replace('~[\r\n]+~', ' ', htmlspecialchars($sub_field_value))) : $sub_field_value;
-								}
+									$article[$element_name . '_' . $sub_field_name] = apply_filters('pmxe_acf_field', ($preview) ? trim(preg_replace('~[\r\n]+~', ' ', htmlspecialchars($sub_field_value))) : $sub_field_value, $element_name . '_' . $sub_field_name, $pid);
+
+                                }
 							}
 						}
 

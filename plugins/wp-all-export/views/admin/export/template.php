@@ -503,7 +503,7 @@
 										<a href="#help" class="wpallexport-help" title="<?php printf(__("Add functions here for use during your export. You can access this file at %s", "wp_all_export_plugin"), preg_replace("%.*wp-content%", "wp-content", $functions));?>" style="top: 0;">?</a>
 										<div class="wp_all_export_functions_preloader"></div>
 									</div>						
-									<div class="input wp_all_export_saving_status" style="display:inline-block;"></div>									
+									<div class="input wp_all_export_saving_status"></div>
 								</div>
 							</div>
 						</div>
@@ -530,7 +530,7 @@
 					</div>				
 					<?php $templates = new PMXE_Template_List(); ?>
 					<div class="load-template">				
-						<select name="load_template" id="load_template" style="padding:2px; width: auto; height: 40px;">
+						<select name="load_template" id="load_template">
 							<option value=""><?php _e('Load Template...', 'wp_all_export_plugin') ?></option>
 							<?php foreach ($templates->getBy()->convertRecords() as $t): ?>
 								<?php 		

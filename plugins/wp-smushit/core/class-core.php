@@ -351,7 +351,7 @@ class Core extends Stats {
 				'utm_medium'   => 'plugin',
 				'utm_campaign' => 'smush_bulksmush_issues_filesizelimit_notice',
 			),
-			'https://premium.wpmudev.org/project/wp-smush-pro/'
+			'https://wpmudev.com/project/wp-smush-pro/'
 		);
 
 		if ( WP_Smush::is_pro() ) {
@@ -359,7 +359,7 @@ class Core extends Stats {
 		} else {
 			$error_in_bulk = sprintf(
 				/* translators: %1$s - opening link tag, %2$s - </a> */
-				esc_html__( '{{smushed}}/{{total}} images were successfully compressed, {{errors}} encountered issues. Are you hitting the 5MB "size limit exceeded" warning? %1$sUpgrade to Smush Pro for FREE%2$s to optimize image files up to 32MB.', 'wp-smushit' ),
+				esc_html__( '{{smushed}}/{{total}} images were successfully compressed, {{errors}} encountered issues. Are you hitting the 5MB "size limit exceeded" warning? %1$sUpgrade to Smush Pro for FREE%2$s to optimize unlimited image files.', 'wp-smushit' ),
 				'<a href="' . esc_url( $upgrade_url ) . '" target="_blank">',
 				'</a>'
 			);
@@ -399,6 +399,16 @@ class Core extends Stats {
 			// Notices.
 			'noticeDismiss'           => esc_html__( 'Dismiss', 'wp-smushit' ),
 			'noticeDismissTooltip'    => esc_html__( 'Dismiss notice', 'wp-smushit' ),
+			// Tutorials.
+			'tutorials'               => esc_html__( 'Tutorials', 'wp-smushit' ),
+			'tutorials_link'          => 'https://wpmudev.com/blog/tutorials/tutorial-category/smush-pro/',
+			'tutorials_strings'       => array(
+				array(
+					'loading'      => esc_html__( 'Loading tutorials...', 'wp-smushit' ),
+					'min_read'     => esc_html__( 'min read', 'wp-smushit' ),
+					'read_article' => esc_html__( 'Read article', 'wp-smushit' ),
+				),
+			),
 		);
 
 		wp_localize_script( $handle, 'wp_smush_msgs', $wp_smush_msgs );

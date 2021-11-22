@@ -8,45 +8,6 @@
   }
 }
 
-// GRID -- GRID --- GRID ---
-// .s-cards {
-//   display: grid;
-//   grid-column-gap: 10px;
-//   grid-row-gap: 10px;
-
-//   @media (min-width: $break-desktop) {
-//     grid-column-gap: 30px;
-//     grid-row-gap: 30px;
-//     border: 1px solid green;
-//     margin-bottom: 50px;
-//   }
-
-//   &--xlarge {
-//     grid-template-columns: repeat(1, 1fr);
-//     max-width: 500px;
-//     margin: 0 auto 50px;
-//   }
-
-//   &--large {
-//     grid-template-columns: repeat(2, 1fr);
-//     @media (min-width: $break-desktop) {
-//       max-width: 700px;
-//       margin: 0 auto 50px;
-//     }
-//   }
-
-//   &--medium {
-//     grid-template-columns: repeat(3, 1fr);
-//     @media (min-width: $break-desktop) {
-//       grid-column-gap: 60px;
-//     }
-//   }
-
-//   &--small {
-//     grid-template-columns: repeat(5, 1fr);
-//   }
-// }
-
 .s-cards {
   display: flex;
   align-items: center;
@@ -72,20 +33,39 @@
     width: 45%;
     max-width: 700px;
     margin: 0 auto 50px;
-    height: 250px;
+    height: 150px;
+    @media (min-width: $break-tablet) {
+      height: 180px;
+    }
+    @media (min-width: $break-desktop) {
+      height: 250px;
+    }
   }
 
   &--medium {
     width: 30%;
-    height: 200px;
+    height: 100px;
     margin: 0 auto 50px;
+
+    @media (min-width: $break-tablet) {
+      height: 130px;
+    }
+    @media (min-width: $break-desktop) {
+      height: 200px;
+    }
   }
 
   &--small {
-    height: 160px;
+    height: 80px;
     width: 20%;
     margin: 0 10px;
     margin: 0 10px 50px;
+    @media (min-width: $break-tablet) {
+      height: 110px;
+    }
+    @media (min-width: $break-desktop) {
+      height: 160px;
+    }
   }
 }
 
@@ -125,6 +105,10 @@
   &--show {
     display: flex;
   }
+
+  &--speaker-items {
+    border: 1px solid red;
+  }
 }
 
 .s-modal {
@@ -160,6 +144,22 @@
         color: $yellow;
       }
     }
+  }
+
+  &__title {
+    margin-bottom: 4px;
+    font-weight: bold;
+    @include font-size(22);
+  }
+
+  &__position {
+    margin-bottom: 4px;
+    @include font-size(17);
+  }
+
+  &__company {
+    margin-bottom: 8px;
+    @include font-size(15);
   }
 
   &__logo {

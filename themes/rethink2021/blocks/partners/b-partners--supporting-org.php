@@ -2,5 +2,6 @@
     'data'  => array(
       'post_type'   => 'partner-items',
       'meta_key'		=> 'ranking',
-      'meta_value'	=> 'supportingOrg'
+      'meta_value'	=> 'supportingOrg',
+      'card_type'   => 'partner'
   ))) ?>

@@ -26,7 +26,7 @@ function jsFn(cb) {
 
 // .scss
 function sassFn(cb) {
-  //1.where is my scss
+  //1.find themain scss file
   return src('../sass/style.scss') //gets all files ending with .scss in src/scss
     //2. pass that file through sass compiler
     .pipe(sass().on('error', sass.logError))
@@ -42,26 +42,46 @@ function sassFn(cb) {
     .pipe(browserSync.stream());
 }
 
-//blocks
-function blocksFn(cb) {
-  //1.where is my scss
-  return src('../blocks/**/*.scss') //gets all files ending with .scss in src/scss
+
+// .scss
+function sassFnGutenburg(cb) {
+  //1.find themain scss file
+  return src('../sass/gutenburg.scss') //gets all files ending with .scss in src/scss
     //2. pass that file through sass compiler
     .pipe(sass().on('error', sass.logError))
-    //3. autoprefix and minimise
     .pipe(postcss([
       autoprefixer(),
       cssnano()
     ]))
-    //4. rename 
+    //3. rename 
     .pipe(rename({ extname: '.min.css' }))
-    //5. where do I save the compiled css file
-    .pipe(dest(function (file) {
-      return file.base;
-    }))
-    //6. stream change to all browsers
+    //4. where do I save the compiled css file
+    .pipe(dest('../style'))
+    //5. stream change to all browsers
     .pipe(browserSync.stream());
 }
+
+
+//blocks
+// function blocksFn(cb) {
+//   //1.find themain scss file
+//   return src('../blocks/**/*.scss') 
+//     //2. pass that file through sass compiler
+//     .pipe(sass().on('error', sass.logError))
+//     //3. autoprefix and minimise
+//     .pipe(postcss([
+//       autoprefixer(),
+//       cssnano()
+//     ]))
+//     //4. rename 
+//     .pipe(rename({ extname: '.min.css' }))
+//     //5. where do I save the compiled css file
+//     .pipe(dest(function (file) {
+//       return file.base;
+//     }))
+//     //6. stream change to all browsers
+//     .pipe(browserSync.stream());
+// }
 
 
 // default function
@@ -70,6 +90,7 @@ function serve() {
     proxy: "https://rethink2.local/",
     notify: false,
     port: 8000,
+    https: true,
     ui: {
       port: 8001
     },
@@ -79,15 +100,27 @@ function serve() {
   // .php
   watch('../**/*.php').on('change', browserSync.reload);
   // blocks
-  watch("../blocks/**/*.scss", blocksFn)
+  // watch("../blocks/**/*.scss", blocksFn)
   // ./sass/*.scss
-  watch('../sass/**/*.scss', sassFn)
+  watch('../sass/**/*.scss', sassFnGutenburg)
   // ./js/main.js
   watch('../js/main.js', jsFn)
 }
+
+
 
 // Set the  default gulp function(s)
 exports.default = function () {
   serve()
 };
+
+
+
+// Update style for the gutenburg blocks ediotor in wp-admin
+// first copy-paste the style.min.j file between the brackets .../sass/gutenburg.scss
+// then run this manually $ gulp gut
+exports.gut = async function () {
+  sassFnGutenburg()
+}
+
 

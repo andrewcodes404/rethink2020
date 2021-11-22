@@ -1,12 +1,12 @@
 <?php
 $cron_job_key = PMXE_Plugin::getInstance()->getOption('cron_job_key');
-$urlToExport = site_url() . '/wp-cron.php?security_token=' . substr(md5($cron_job_key . $update_previous->id), 0, 16) . '&export_id=' . $update_previous->id . '&action=get_data';
+$urlToExport = site_url() . '/wp-load.php?security_token=' . substr(md5($cron_job_key . $update_previous->id), 0, 16) . '&export_id=' . $update_previous->id . '&action=get_data';
 $uploads = wp_upload_dir();
 
 $bundle_path = wp_all_export_get_absolute_path($update_previous->options['bundlepath']);
 
 if (!empty($bundle_path)) {
-    $bundle_url = site_url() . '/wp-cron.php?security_token=' . substr(md5($cron_job_key . $update_previous->id), 0, 16) . '&export_id=' . $update_previous->id . '&action=get_bundle&t=zip';
+    $bundle_url = site_url() . '/wp-load.php?security_token=' . substr(md5($cron_job_key . $update_previous->id), 0, 16) . '&export_id=' . $update_previous->id . '&action=get_bundle&t=zip';
 }
 
 $isImportAllowedSpecification = new \Wpae\App\Specification\IsImportAllowed();
@@ -47,7 +47,6 @@ $isGoogleFeed = false;
         <div class="tab-content-container">
             <div class="tab-content selected normal-tab" id="tab1-content">
                 <h3 style="margin-top: 30px; margin-bottom: 30px;"><?php _e("Click to Download", 'wp_all_export_plugin'); ?></h3>
-
                 <div class="wpallexport-free-edition-notice" id="migrate-orders-notice" style="padding: 20px; margin-bottom: 35px; display: none;">
                     <a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707173&edd_options%5Bprice_id%5D=1&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=migrate-orders"><?php _e('Upgrade to the Pro edition of WP All Export to Migrate Orders', PMXE_Plugin::LANGUAGE_DOMAIN);?></a>
                     <p><?php _e('If you already own it, remove the free edition and install the Pro edition.', PMXE_Plugin::LANGUAGE_DOMAIN);?></p>

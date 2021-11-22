@@ -676,12 +676,12 @@ $options = \PMXE_Plugin::getInstance()->getOption();
                         <label>
                             <input type="radio" name="scheduling_enable" value="1" <?php if($schedulingExportOptions['scheduling_enable'] == 1) {?> checked="checked" <?php }?>/>
 
-                            <h4 style="margin: 0; position: relative; display: inline-block;"><?php _e('Automatic Scheduling', PMXE_Plugin::LANGUAGE_DOMAIN); ?>
-                                <span class="connection-icon" style="position: absolute; top:-1px; left: 152px;">
+                            <h4 style="margin: 0; display: inline-flex; align-items: center;"><?php _e('Automatic Scheduling', PMXE_Plugin::LANGUAGE_DOMAIN); ?>
+                                <span class="connection-icon" style="margin-left: 8px;">
 															<?php include_once('ConnectionIcon.php'); ?>
 														</span>
                                 <?php if (!$scheduling->checkConnection()) { ?>
-                                    <span class="wpai-license" style="margin-left: 25px; display: inline-block; font-weight: normal; <?php if(!$hasActiveLicense) { ?> display: none; <?php }?> color: #f2b03d;  ">Unable to connect - <a target="_blank" style="text-decoration: underline;" href="http://wpallimport.com/support">please contact support</a>.</span>
+                                    <span class="wpai-license" style="margin-left: 8px; font-weight: normal; <?php if(!$hasActiveLicense) { ?> display: none; <?php }?> color: #f2b03d;  ">Unable to connect, please contact support.</span>
                                 <?php } ?>
                             </h4>
                         </label>
@@ -818,7 +818,7 @@ $options = \PMXE_Plugin::getInstance()->getOption();
                             <div class="subscribe" style="margin-left: 5px; margin-top: 65px; margin-bottom: 130px; position: relative;">
                                 <div class="button-container">
 
-                                    <a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=515704" target="_blank" id="subscribe-button">
+                                    <a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=515704&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=automatic-scheduling" target="_blank" id="subscribe-button">
                                         <div class="button button-primary button-hero wpallexport-large-button button-subscribe"
                                              style="background-image: none; width: 140px; text-align: center; position: absolute; z-index: 4;">
                                             <svg class="success" width="30" height="30" viewBox="0 0 1792 1792"

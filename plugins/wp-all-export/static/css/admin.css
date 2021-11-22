@@ -300,11 +300,12 @@
 	}
 
 .wpallexport-plugin span.wpai-license-text {
-	margin-left: 20px;
+	margin-left: 8px;
 }
 
-.wpallexport-plugin .wpai-license img {
-	position: absolute;
+.wpallexport-plugin .wpai-license,
+.wpallexport-plugin .wpai-no-license {
+	display: flex;
 }
 
 .wpallexport-plugin .wpae-available-fields-group{
@@ -603,7 +604,9 @@
 	background: url('../img/continue.png') no-repeat 93% 50% #425f9a;
 	border: none;
 }
-.wpallexport-plugin .wpallexport-large-button:hover{
+.wpallexport-plugin .wpallexport-large-button:hover,
+.wpallexport-plugin .wpallexport-large-button:active,
+.wpallexport-plugin .wpallexport-large-button:focus{
 	background: url('../img/continue.png') no-repeat 93% 50% #425f9a;
 	border: none;
 	box-shadow: none;
@@ -850,9 +853,19 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	color: #40acad;
 	text-decoration: none;
 }
-.wpallexport-plugin div.error{
-	clear: both;
+.wpallexport-plugin div.error,
+.wpallexport-plugin div.updated {
 	margin-top: 15px;
+}
+.wpallexport-plugin div.error.license-status,
+.wpallexport-plugin div.updated.license-status {
+	margin: 0 0 0 2px;
+	display: inline-block;
+	text-transform: capitalize;
+	padding: 2px 10px;
+	height: 18px;
+	vertical-align: 1px;
+	line-height: 17px;
 }
 .wpallexport-plugin .wp-pointer-content ul,
 .wpallexport-plugin .wpallexport-pointer-content ul{
@@ -892,7 +905,7 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	font-size: 12px;
 	/*height: 25px;*/
 	width: auto;
-	padding: 2px;
+	padding: 4px 25px 4px 6px;
 	color: #000;
 }
 .wpallexport-plugin .wpallexport-template input[type="text"],
@@ -1272,6 +1285,7 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 		vertical-align: top;
 		border: none;		
 		font-size: 12px !important;
+		border: none;
 	}
 	.wpallexport-plugin table.wpallexport-layout td.left {
 		/*min-width: 490px;*/
@@ -1378,6 +1392,25 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 
 .wpallexport-plugin .wpallexport-wrapper{
 	width: 1200px;
+}
+
+.wpallexport-plugin form.wpallexport-choose-file .chosen-search input[type="text"] {
+	font-size: 15px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xNS44NTMgMTYuNTZjLTEuNjgzIDEuNTE3LTMuOTExIDIuNDQtNi4zNTMgMi40NC01LjI0MyAwLTkuNS00LjI1Ny05LjUtOS41czQuMjU3LTkuNSA5LjUtOS41IDkuNSA0LjI1NyA5LjUgOS41YzAgMi40NDItLjkyMyA0LjY3LTIuNDQgNi4zNTNsNy40NCA3LjQ0LS43MDcuNzA3LTcuNDQtNy40NHptLTYuMzUzLTE1LjU2YzQuNjkxIDAgOC41IDMuODA5IDguNSA4LjVzLTMuODA5IDguNS04LjUgOC41LTguNS0zLjgwOS04LjUtOC41IDMuODA5LTguNSA4LjUtOC41eiIvPjwvc3ZnPg==') no-repeat right 5px top 50%;
+	background-size: auto;
+	background-size: 12px;
+}
+
+.wpallexport-plugin .chosen-results .group-result,
+.wpallexport-plugin .chosen-results .active-result {
+	font-size: 15px;
+	line-height: 28px;
+}
+
+.wpallexport-plugin .chosen-results .active-result.highlighted {
+	background: #eee;
+	color: #555;
 }
 
 /*--------------------------------------------------------------------------
@@ -1979,10 +2012,10 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	color: #fff;
 	display: inline-block;
 	font-size: 14px;
-	height: 18px;
+	height: 21px;
 	margin: 0;
 	float: right;
-	padding: 12px 40px 10px 50px;
+	padding: 13px 40px 10px 50px;
 	text-decoration: none;
 	font-weight: bold;	
 	min-width: 60px;
@@ -2012,17 +2045,36 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	width: 100% !important;
 }
 .wpallexport-plugin .wp_all_export_rule_inputs .chosen-container-single .chosen-single{
-	height: 41px;
+	height: 48px;
 	line-height: 38px;
-	font-size: 14px;
+	font-size: 15px;
+}
+
+.wpallexport-plugin .chosen-container-single .chosen-single span {
+	margin-top: 5px;
+	margin-left: 10px;
+	color: #777;
+}
+
+.wpallexport-plugin .googleMerchants .chosen-container-single .chosen-single span,
+.wpallexport-plugin .export-single .chosen-container-single .chosen-single span {
+	margin-top: 0;
+}
+.wpallexport-plugin .timezone-select .chosen-container-single .chosen-single span {
+	margin-top: 0;
+}
+.wpallexport-plugin .chosen-container-single .chosen-search input[type="text"] {
+	background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xNS44NTMgMTYuNTZjLTEuNjgzIDEuNTE3LTMuOTExIDIuNDQtNi4zNTMgMi40NC01LjI0MyAwLTkuNS00LjI1Ny05LjUtOS41czQuMjU3LTkuNSA5LjUtOS41IDkuNSA0LjI1NyA5LjUgOS41YzAgMi40NDItLjkyMyA0LjY3LTIuNDQgNi4zNTNsNy40NCA3LjQ0LS43MDcuNzA3LTcuNDQtNy40NHptLTYuMzUzLTE1LjU2YzQuNjkxIDAgOC41IDMuODA5IDguNSA4LjVzLTMuODA5IDguNS04LjUgOC41LTguNS0zLjgwOS04LjUtOC41IDMuODA5LTguNSA4LjUtOC41eiIvPjwvc3ZnPg==') no-repeat right 5px top 50%;
+	background-size: 12px;
 }
 .wpallexport-plugin .wp_all_export_rule_inputs .chosen-container-single .chosen-single div{
 	top: 9px;
+	display: none;
 }
 
 .wpallexport-plugin #wp_all_export_value{
 	font-size: 16px;
-	height: 42px;
+	height: 48px;
 	padding: 10px;	
 	border: 1px solid #ddd;
 	border-radius: 5px;
@@ -2071,6 +2123,7 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	width: 25%;
 	color: #000;
 	font-size: 14px;
+	word-wrap: break-word;
 }
 .wpallexport-plugin .wp_all_export_filtering_rules li{
 	position: relative;
@@ -2255,6 +2308,12 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	.wpallexport-plugin form.wpallexport-template .load-template {		
 		display: block;
 		font-size: 12px;		
+	}
+
+	.wpallexport-plugin form.wpallexport-template .load-template select {
+		width: auto;
+		height: 40px;
+		padding: 4px 25px 4px 6px;
 	}
 
 	.wpallexport-plugin form.wpallexport-step-3 .wpallexport-section .wpallexport-content-section{
@@ -3452,6 +3511,11 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 .wpallexport-plugin table.wpallexport-layout td.left{float:left;}
 .wpallexport-plugin table.wpallexport-layout td.right{float:right;}
 
+.wpallexport-plugin .manage-column.check-column,
+.wpallexport-plugin #the-pmxi-admin-import-list .check-column{
+	padding: 10px;
+}
+
 /*--------------------------------------------------------------------------
 *
 *	Setting Page
@@ -3554,6 +3618,16 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 
 .wpallexport-plugin .wpae-custom-field ul li{
 	margin-left: 15px;
+}
+
+.wpallexport-plugin .function-editor,
+.wpallexport-plugin .client-mode-settings {
+	margin-top: 2em;
+}
+
+.wpallexport-plugin .settings .submit-buttons {
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 /*--------------------------------------------------------------------------
 *
@@ -4215,6 +4289,13 @@ input label {
 	display: none;
 }
 
+.wpallexport-plugin #wp_all_export_xml_element_chosen,
+.wpallexport-plugin #wp_all_export_rule_chosen {
+	background: #fff url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E') no-repeat right 5px top 50%;
+    background-size: auto;
+	background-size: 16px 16px;
+}
+
 .wpallexport-plugin .chosen-container-single .chosen-single {
 	height: 41px;
 	line-height: 38px;
@@ -4227,13 +4308,12 @@ input label {
 .wpallexport-plugin .chosen-container-single .chosen-single div {
 	top: 9px;
 }
-/** END COMBINE MULTIPLE ELEMENTS INTO ONE **/
 
-.wpallexport-plugin .connection-icon {
-	top: -1px;
-	left: 152px;
-	position: absolute;
+.wpallexport-plugin .chosen-results li.no-results {
+	padding: 10px;
+	font-size: 15px;
 }
+/** END COMBINE MULTIPLE ELEMENTS INTO ONE **/
 
 .wpallexport-plugin .pmxe_date_format{
 	width: 100%;
@@ -4245,4 +4325,18 @@ input label {
 	background-color: #fff;
 	margin-bottom: 10px;
 
+}
+
+.wpallexport-plugin .wp_all_export_saving_status {
+	padding: 10px;
+	display: block;
+}
+
+.wpallexport-plugin .wp_all_export_saving_status.error,
+.wpallexport-plugin .wp_all_export_saving_status.updated {
+	background: white !important;
+}
+
+.category-mapper .mask {
+	display: none;
 }

@@ -44,10 +44,12 @@
     margin-right: 15px;
     cursor: pointer;
     transition: 0.4s;
+
     a {
       text-decoration: none;
     }
     svg {
+      color: $green;
       padding: 3px;
       transition: 0.4s;
       width: 30px;

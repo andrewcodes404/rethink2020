@@ -12,17 +12,20 @@
     top: 0;
     left: 0;
     right: 0;
+    background-color: pink;
 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-
+    cursor: pointer;
     background-color: rgba(black, 0.7);
     z-index: 10;
 
     opacity: 0;
     display: none;
+    // display: flex;
+    // opacity: 1;
 
     &__show {
         display: flex;

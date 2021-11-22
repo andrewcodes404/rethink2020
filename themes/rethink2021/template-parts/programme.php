@@ -1,120 +1,98 @@
-<?php  
-    $the_queryDayOne = new WP_Query( array(
-        'post_type' => 'session' , 
-        'meta_key'  => 'time_start',
+<?php
+$location = $args['data']['location_value'];
+$day = $args['data']['day'];
+$daytext = "";
+$show_title = $args['data']['show_title'];
+$am_or_pm = "";
+$am_or_pm = $args['data']['am_or_pm'];
+
+if ($day === "day1") {
+    $daytext = "Day 1 - Tuesday 05 Oct 2021";
+} elseif ($day === "day2") {
+    $daytext = "Day 2 - Wednesday 06 Oct 2021";
+}
+
+if ($am_or_pm === "both" || null) {
+    $the_query = new WP_Query(array(
+        'post_type' => 'session',
+        'meta_key' => 'time_start',
         'order' => 'ASC',
-        'orderby'   => 'meta_value',
-        
+        'orderby' => 'meta_value',
+
         'meta_query' => array(
-            'relation'		=> 'AND',
+            'relation' => 'AND',
             array(
                 'key' => 'location',
-                'value' => $args['data']['location_value'],
-                ),
+                'value' => $location,
+            ),
             array(
                 'key' => 'day',
-                'value' => 'day1',
-                ),
-        )
-        )    
+                'value' => $day,
+            ),
+
+        ),
+    )
     );
-
-
-    $the_queryDayTwo = new WP_Query( array(
-        'post_type' => 'session' , 
-        'meta_key'  => 'time_start',
+} else {
+    $the_query = new WP_Query(array(
+        'post_type' => 'session',
+        'meta_key' => 'time_start',
         'order' => 'ASC',
-        'orderby'   => 'meta_value',
-        
+        'orderby' => 'meta_value',
+
         'meta_query' => array(
-            'relation'		=> 'AND',
+            'relation' => 'AND',
             array(
                 'key' => 'location',
-                'value' => $args['data']['location_value'],
-                ),
+                'value' => $location,
+            ),
             array(
                 'key' => 'day',
-                'value' => 'day2',
-                ),
-        )
-        )    
+                'value' => $day,
+            ),
+            array(
+                'key' => 'am_or_pm',
+                'value' => $am_or_pm,
+            ),
+
+        ),
+    )
     );
- ?>
+}
 
-
-
-<?php if (is_admin()) {
-    echo '<p class="b-programme-hint"> <code >hint: this is the ' .  $args["data"]["title"] . ' PROGRAMME block</code></p>';
-    }
 ?>
 
+<?php if (is_admin()) {
+    echo '<p class="b-programme-hint"> <code >hint: this is the ' . $day . " - " . $location . " - " . $am_or_pm . ' PROGRAMME block</code></p>';
+}
+?>
 
 <div class="programme-wrapper">
-<div class="programme">
+    <div class="programme">
 
-    <div class="b-programme__day  b-programme__day--<?php echo $args['data']['location_value']?>">
+        <div class="b-programme__day  b-programme__day--<?php echo $args['data']['location_value'] ?>">
 
-        <?php if ( $the_queryDayOne->have_posts() ) : ?>
+            <?php if ($the_query->have_posts()): ?>
 
-        
-            <h4>Day 1 - 05 Oct 2021</h4>
-            <?php while ( $the_queryDayOne->have_posts() ) : $the_queryDayOne->the_post(); ?>
+            <?php if ($show_title): ?>
+            <h3> <?php echo $daytext ?> </h3>
+            <?php endif?>
+            <?php while ($the_query->have_posts()): $the_query->the_post();?>
             <?php $post_id = get_the_ID();?>
-           
-           
-            <div class="b-programme__session">
-                <p><?php the_field('time_start', $post_id)?> : <?php the_title(); ?></p>
 
-                <p>day - <?php the_field('day', $post_id)?> </p>
-                <p>time_start - <?php the_field('time_start', $post_id)?> </p>
-                <p>time_end - <?php the_field('time_end', $post_id)?> </p>
-                <p>duration - <?php the_field('duration', $post_id)?> </p>
-                <p>mandatory  - <?php  if ( get_field('mandatory', $post_id)) {echo "true";} else {echo "false";}?> </p>
-                <p>display_priority - <?php the_field('display_priority', $post_id)?> </p>
-                
-                <p>category - <?php the_field('category', $post_id)?> </p>
-
-                <p>sdg - <?php the_field('sdg', $post_id)?> </p>
-                <p>presentation_type' - <?php the_field('presentation_type', $post_id)?> </p>
-
-                <p>speakers - <?php the_field('speakers', $post_id)?> </p>
-            </div>
+            <?php $am_or_pm = get_field('am_or_pm', $post_id);?>
 
 
 
-            <?php endwhile; ?>
+            <?php get_template_part('template-parts/session', null, array('post_id' => $post_id))?>
 
-            <?php wp_reset_postdata(); ?>
-       
-        <?php endif; ?>
+            <?php endwhile;?>
 
+            <?php wp_reset_postdata();?>
+
+            <?php endif;?>
+
+
+        </div>
     </div>
-
-
-
-
-    <div class="b-programme__day  b-programme__day--<?php echo $args['data']['location_value']?>">
-
-        <?php if ( $the_queryDayTwo->have_posts() ) : ?>
-
-           
-                <h4>Day 2 - 06 Oct 2021</h4>
-                <?php while ( $the_queryDayTwo->have_posts() ) : $the_queryDayTwo->the_post(); ?>
-
-                <?php $post_id = get_the_ID();?>
-
-                <div class="b-programme__session">
-                      <p><?php the_field('time_start', $post_id)?> : <?php the_title(); ?></p>
-                </div>
-                <?php endwhile; ?>
-
-                <?php wp_reset_postdata(); ?>
-            </div>
-        <?php endif; ?>
-
-   
-
-</div>
-
-
 </div>

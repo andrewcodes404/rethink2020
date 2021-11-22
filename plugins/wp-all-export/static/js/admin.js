@@ -1282,8 +1282,10 @@
             $('.single-field-options').show();
             $('.php_snipped').show();
             $('.add-new-field-notice').hide();
+            $addAnotherForm.find('.php_snipped').show();
 
-			$addAnotherForm.removeAttr('rel');
+
+            $addAnotherForm.removeAttr('rel');
 			$addAnotherForm.removeClass('dc').addClass('cc');
 			$addAnotherForm.find('.cc_field').hide();
 
@@ -1292,6 +1294,8 @@
 			$addAnotherForm.find('div[class^=switcher-target]').hide();
 			$addAnotherForm.find('#coperate_php').removeAttr('checked');
 			$addAnotherForm.find('input.column_name').parents('div.input:first').show();
+            $addAnotherForm.find('.wp-all-export-advanced-field-options-content').show();
+            $addAnotherForm.find('.php_snipped').show();
 
 			$('.custom_column').removeClass('active');
 
@@ -1303,7 +1307,7 @@
 			});
 
 			$('.wp-all-export-chosen-select').trigger('chosen:updated');
-			$('.wp_all_export_saving_status').html('');
+			$('.wp_all_export_saving_status').removeClass('error updated').html('');
 
 			$('.wpallexport-overlay').show();
 
@@ -1481,7 +1485,8 @@
 
 			$('.custom_column').removeClass('active');
 
-		});
+        });
+
 
 		// Clicking on column for edit
 		$('#columns').on('click', '.custom_column', function(){
@@ -1507,7 +1512,7 @@
 			var $elementLabel = $(this).find('input[name^=cc_label]');
 
 
-			$('.wp_all_export_saving_status').html('');
+			$('.wp_all_export_saving_status').removeClass('error updated').html('');
 
 			$addAnotherForm.find('select[name=column_value_type]').find('option').each(function(){
 				if ($(this).attr('label') == $elementLabel.val() && $(this).val() == $elementType.val())
@@ -1675,6 +1680,11 @@
 			$addAnotherForm.find('input.switcher').change();
 
 			var $column_name = $(this).find('input[name^=cc_name]').val();
+
+
+			$addAnotherForm.find('.wp-all-export-advanced-field-options-content').show();
+            $addAnotherForm.find('.php_snipped').show();
+            $('.php_snipped').show();
 
 			$addAnotherForm.find('input.column_name').val($column_name);
 			$addAnotherForm.show();
@@ -2250,6 +2260,7 @@
     // Add new filtering rule
     $(document).on('click', '#wp_all_export_add_rule', function(){
 
+    	return false;
     	var $el   = $('#wp_all_export_xml_element');
     	var $rule = $('#wp_all_export_rule');
     	var $val  = $('#wp_all_export_value');
@@ -2365,6 +2376,16 @@
         },200);
 	});
 
+
+    $('.wp_all_export_save_client_mode').click(function(e){
+        $('.wp_all_export_save_client_mode_container').addClass('wpae-shake');
+        setTimeout(function(){
+            $('.wp_all_export_save_client_mode_container').removeClass('wpae-shake');
+            $('.php-client-mode-upgrade').slideDown();
+            return false;
+        },200);
+    });
+
     var $tmp_xml_template = '';
     var $xml_template_first_load = true;
 
@@ -2471,7 +2492,11 @@
 				}
 				vm.isGoogleMerchantsExport = true;
                 $('.wpallexport-submit-template').attr('disabled', 'disabled');
-                $('.wpallexport-google-merchants-template').show();
+
+                setTimeout(function(){
+                    $('.wpallexport-google-merchants-template').show();
+				}, 100);
+
     			break;
     		default:
     			resetDraggable();

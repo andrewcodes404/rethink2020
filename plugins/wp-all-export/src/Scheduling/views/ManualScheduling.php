@@ -18,25 +18,25 @@
         <p style="margin:0;">
         <h5 style="margin-bottom: 10px; margin-top: 10px; font-size: 14px;  color: #ccc;"><?php _e('Trigger URL'); ?></h5>
         <code style="padding: 10px; border: 1px solid #ccc; display: block; width: 90%; color: #ccc; user-select: none; cursor: default;">
-            <?php echo site_url() . '/wp-cron.php?export_key=●●●●●●●●●●●●&export_id=' . $export_id . '&action=trigger'; ?>
+            <?php echo site_url() . '/wp-load.php?export_key=●●●●●●●●●●●●&export_id=' . $export_id . '&action=trigger'; ?>
         </code>
         </p>
         <p style="margin: 0 0 15px;">
         <h5 style="margin-bottom: 10px; margin-top: 10px; font-size: 14px;  color: #ccc;"><?php _e('Processing URL'); ?></h5>
         <code style="padding: 10px; border: 1px solid #ccc; display: block; width: 90%; color: #ccc; user-select: none; cursor: default;">
-            <?php echo site_url() . '/wp-cron.php?export_key=●●●●●●●●●●●●&export_id=' . $export_id . '&action=processing'; ?>
+            <?php echo site_url() . '/wp-load.php?export_key=●●●●●●●●●●●●&export_id=' . $export_id . '&action=processing'; ?>
         </code>
         </p>
         <p style="margin: 0 0 15px;">
         <h5 style="margin-bottom: 10px; margin-top: 10px; font-size: 14px;"><?php _e('File URL'); ?></h5>
         <code style="padding: 10px; border: 1px solid #ccc; display: block; width: 90%;">
-            <?php echo site_url() . '/wp-cron.php?security_token=' . substr(md5($cron_job_key . $export_id), 0, 16) . '&export_id=' . $export_id . '&action=get_data'; ?>
+            <?php echo site_url() . '/wp-load.php?security_token=' . substr(md5($cron_job_key . $export_id), 0, 16) . '&export_id=' . $export_id . '&action=get_data'; ?>
         </code>
         </p>
         <p style="margin: 0 0 15px;">
         <h5 style="margin-bottom: 10px; margin-top: 10px; font-size: 14px;"><?php _e('Bundle URL'); ?></h5>
         <code style="padding: 10px; border: 1px solid #ccc; display: block; width: 90%;">
-            <?php echo site_url() . '/wp-cron.php?security_token=' . substr(md5($cron_job_key . $export_id), 0, 16) . '&export_id=' . $export_id . '&action=get_bundle'; ?>
+            <?php echo site_url() . '/wp-load.php?security_token=' . substr(md5($cron_job_key . $export_id), 0, 16) . '&export_id=' . $export_id . '&action=get_bundle'; ?>
         </code>
         </p>
         <p style="margin:0; padding-left: 0;"><?php _e('Read more about manual scheduling'); ?>: <a target="_blank" href="http://www.wpallimport.com/documentation/recurring/cron/?utm_source=export-plugin-free&utm_medium=read-more&utm_campaign=manual-scheduling">
