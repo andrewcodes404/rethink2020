@@ -74,8 +74,6 @@ function pmxe_wp_ajax_wpallexport()
     } else {
         XmlExportEngine::$post_types = $exportOptions['cpt'];
 
-        // $is_products_export = ($exportOptions['cpt'] == 'product' and class_exists('WooCommerce'));
-
         if (in_array('users', $exportOptions['cpt']) or in_array('shop_customer', $exportOptions['cpt'])) {
             add_action('pre_user_query', 'wp_all_export_pre_user_query', 10, 1);
             $exportQuery = new WP_User_Query(array('orderby' => 'ID', 'order' => 'ASC', 'number' => $posts_per_page, 'offset' => $export->exported));

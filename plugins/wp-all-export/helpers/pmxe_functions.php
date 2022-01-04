@@ -56,7 +56,7 @@
 		{
 			if (empty($post_type)) return array();
 
-			$post_type = ($post_type == 'product' and class_exists('WooCommerce')) ? array('product', 'product_variation') : array($post_type);
+			$post_type = ($post_type == 'product' and class_exists('WooCommerce')) ? array('product') : array($post_type);
 
 			global $wpdb;
 			$table_prefix = $wpdb->prefix;

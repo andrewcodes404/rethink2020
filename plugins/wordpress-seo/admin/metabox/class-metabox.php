@@ -298,6 +298,10 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			$values['semrushIntegrationActive'] = 0;
 		}
 
+		if ( $values['wincherIntegrationActive'] && $this->post->post_type === 'attachment' ) {
+			$values['wincherIntegrationActive'] = 0;
+		}
+
 		return $values;
 	}
 
@@ -866,12 +870,12 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 
 		$asset_manager->localize_script( $post_edit_handle, 'wpseoAdminL10n', WPSEO_Utils::get_admin_l10n() );
-		$asset_manager->localize_script( $post_edit_handle, 'wpseoFeaturesL10n', WPSEO_Utils::retrieve_enabled_features() );
 
 		$plugins_script_data = [
 			'replaceVars' => [
 				'no_parent_text'           => __( '(no parent)', 'wordpress-seo' ),
 				'replace_vars'             => $this->get_replace_vars(),
+				'hidden_replace_vars'      => $this->get_hidden_replace_vars(),
 				'recommended_replace_vars' => $this->get_recommended_replace_vars(),
 				'scope'                    => $this->determine_scope(),
 				'has_taxonomies'           => $this->current_post_type_has_taxonomies(),
@@ -887,8 +891,6 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'dependencies'            => YoastSEO()->helpers->asset->get_dependency_urls_by_handle( 'yoast-seo-analysis-worker' ),
 			'keywords_assessment_url' => YoastSEO()->helpers->asset->get_asset_url( 'yoast-seo-used-keywords-assessment' ),
 			'log_level'               => WPSEO_Utils::get_analysis_worker_log_level(),
-			// We need to make the feature flags separately available inside of the analysis web worker.
-			'enabled_features'        => WPSEO_Utils::retrieve_enabled_features(),
 		];
 
 		$alert_dismissal_action = YoastSEO()->classes->get( \Yoast\WP\SEO\Actions\Alert_Dismissal_Action::class );
@@ -901,6 +903,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'userLanguageCode' => WPSEO_Language_Utils::get_language( \get_user_locale() ),
 			'isPost'           => true,
 			'isBlockEditor'    => $is_block_editor,
+			'postStatus'       => get_post_status( $post_id ),
 			'analysis'         => [
 				'plugins'                     => $plugins_script_data,
 				'worker'                      => $worker_script_data,
@@ -980,7 +983,21 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'sitedesc',
 			'sep',
 			'page',
+			'currentdate',
 			'currentyear',
+			'currentmonth',
+			'currentday',
+			'post_year',
+			'post_month',
+			'post_day',
+			'name',
+			'author_first_name',
+			'author_last_name',
+			'permalink',
+			'post_content',
+			'category_title',
+			'tag',
+			'category',
 		];
 
 		foreach ( $vars_to_cache as $var ) {
@@ -989,6 +1006,15 @@ class WPSEO_Metabox extends WPSEO_Meta {
 
 		// Merge custom replace variables with the WordPress ones.
 		return array_merge( $cached_replacement_vars, $this->get_custom_replace_vars( $this->get_metabox_post() ) );
+	}
+
+	/**
+	 * Returns the list of replace vars that should be hidden inside the editor.
+	 *
+	 * @return string[] The hidden replace vars.
+	 */
+	protected function get_hidden_replace_vars() {
+		return ( new WPSEO_Replace_Vars() )->get_hidden_replace_vars();
 	}
 
 	/**
@@ -1066,6 +1092,11 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		}
 
 		$custom_fields = get_post_custom( $post->ID );
+
+		// If $custom_fields is an empty string or generally not an array, return early.
+		if ( ! is_array( $custom_fields ) ) {
+			return $custom_replace_vars;
+		}
 
 		foreach ( $custom_fields as $custom_field_name => $custom_field ) {
 			// Skip private custom fields.

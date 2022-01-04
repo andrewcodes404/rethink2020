@@ -58,7 +58,12 @@ function pmxe_wp_ajax_wpae_filtering_count(){
 	XmlExportEngine::$is_comment_export = ( 'comments' == $post['cpt'] ) ? true : false;
 	XmlExportEngine::$is_taxonomy_export = ( 'taxonomies' == $post['cpt'] ) ? true : false;
 	XmlExportEngine::$post_types = array($post['cpt']);
-	XmlExportEngine::$exportOptions['export_variations'] = empty($post['export_variations']) ? XmlExportEngine::VARIABLE_PRODUCTS_EXPORT_PARENT_AND_VARIATION : $post['export_variations'];
+
+	if(XmlExportEngine::get_addons_service()->isWooCommerceAddonActive()) {
+        XmlExportEngine::$exportOptions['export_variations'] = empty($post['export_variations']) ? XmlExportEngine::VARIABLE_PRODUCTS_EXPORT_PARENT_AND_VARIATION : $post['export_variations'];
+    } else {
+        XmlExportEngine::$exportOptions['export_variations'] = XmlExportEngine::VARIABLE_PRODUCTS_EXPORT_PARENT;
+    }
 
 	$filters = \Wpae\Pro\Filtering\FilteringFactory::getFilterEngine();
 	$filters->init($filter_args);
@@ -78,7 +83,7 @@ function pmxe_wp_ajax_wpae_filtering_count(){
 	if ($post['export_type'] == 'advanced') 
 	{
 		if (XmlExportEngine::$is_user_export)
-		{			
+		{
 			// get total users
 			$totalQuery = eval('return new WP_User_Query(array(' . PMXE_Plugin::$session->get('wp_query') . ', \'offset\' => 0, \'number\' => 10 ));');
 			if ( ! empty($totalQuery->results)){
@@ -110,7 +115,7 @@ function pmxe_wp_ajax_wpae_filtering_count(){
 			ob_get_clean();
 		}
 		else
-		{			
+		{
 			remove_all_actions('parse_query');
 			remove_all_actions('pre_get_posts');
 			remove_all_filters('posts_clauses');			
@@ -232,7 +237,12 @@ function pmxe_wp_ajax_wpae_filtering_count(){
 			remove_all_actions('pre_get_posts');			
 			remove_all_filters('posts_clauses');			
 
-			$cpt = ($is_products_export) ? array('product', 'product_variation') : array($post['cpt']);
+			if(XmlExportEngine::get_addons_service()->isWooCommerceAddonActive()) {
+			    $custom_posts = ['product', 'product_variation'];
+            } else {
+			    $custom_posts = ['product'];
+            }
+			$cpt = ($is_products_export) ? $custom_posts : array($post['cpt']);
 
 			// get total custom post type records
 			$totalQuery = new WP_Query( array( 'post_type' => $cpt, 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'posts_per_page' => 10 ));
@@ -244,7 +254,7 @@ function pmxe_wp_ajax_wpae_filtering_count(){
 			wp_reset_postdata();
 
 			ob_start();
-			// get custom post type records depends on filters			
+			// get custom post type records depends on filters
 			add_filter('posts_where', 'wp_all_export_posts_where', 10, 1);
 			add_filter('posts_where', 'wp_all_export_numbering_where', 15, 1);
 
@@ -255,15 +265,24 @@ function pmxe_wp_ajax_wpae_filtering_count(){
 
 				add_filter('posts_where', 'wp_all_export_numbering_where', 15, 1);
 
-				$productsQuery = new WP_Query( array( 'post_type' => array('product', 'product_variation'), 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'posts_per_page' => 10));
-				$variationsQuery = new WP_Query( array( 'post_type' => 'product_variation', 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'posts_per_page' => 10));
+				if(XmlExportEngine::get_addons_service()->isWooCommerceAddonActive()) {
+                    $productsQuery = new WP_Query(array('post_type' => array('product', 'product_variation'), 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'posts_per_page' => 10));
+                    $variationsQuery = new WP_Query(array('post_type' => 'product_variation', 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'posts_per_page' => 10));
 
-				$foundProducts = $productsQuery->found_posts;
+                    $foundProducts = $productsQuery->found_posts;
+                    $foundVariations = $variationsQuery->found_posts;
 
-				$foundVariations = $variationsQuery->found_posts;
+                    $foundRecords = $foundProducts;
+                    $hasVariations = !!$foundVariations;
 
-				$foundRecords = $foundProducts;
-				$hasVariations = !!$foundVariations;
+                } else if (XmlExportEngine::get_addons_service()->isWooCommerceProductAddonActive()) {
+                    $productsQuery = new WP_Query(array('post_type' => array('product'), 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'posts_per_page' => 10));
+                    $foundProducts = $productsQuery->found_posts;
+
+
+                    $foundRecords = $foundProducts;
+                    $hasVariations = false;
+                }
 
                 remove_filter('posts_where', 'wp_all_export_numbering_where');
 

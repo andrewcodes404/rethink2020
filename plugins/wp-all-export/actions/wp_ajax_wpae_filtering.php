@@ -46,20 +46,72 @@ function pmxe_wp_ajax_wpae_filtering(){
 
 	$response['html'] = ob_get_clean();
 
-	if ( (XmlExportEngine::$is_user_export && $post['cpt'] != 'shop_customer' && !$addons->isUserAddonActive()) || XmlExportEngine::$is_comment_export || XmlExportEngine::$is_taxonomy_export || $post['cpt'] == 'shop_customer' )
+	if ( (XmlExportEngine::$is_user_export && $post['cpt'] != 'shop_customer' && !$addons->isUserAddonActive()) || XmlExportEngine::$is_comment_export || XmlExportEngine::$is_taxonomy_export || ($post['cpt'] == 'shop_customer' && (!$addons->isUserAddonActive() || PMUE_EDITION != 'paid')) )
 	{
 		$response['btns'] = '';
 		exit(json_encode($response)); die;
 	}
-	
+
+	$cpt = $post['cpt'];
+
+	if(!is_array($cpt)) {
+	    $cpt =[$cpt];
+    }
+
+    $return_empty_buttons = false;
+	if (!$addons->isWooCommerceAddonActive() &&
+                (
+                    in_array('shop_order', $cpt) || in_array('shop_review', $cpt) ||
+                    (in_array('product', $cpt) && \class_exists('WooCommerce')) || in_array('shop_coupon', $cpt)
+                )
+            )
+	{
+	    $return_empty_buttons = true;
+    }
+
+
+    if(in_array('shop_order', $cpt) && $addons->isWooCommerceOrderAddonActive()) {
+	    $return_empty_buttons = false;
+    }
+
+    if(in_array('product', $cpt) && $addons->isWooCommerceProductAddonActive()) {
+	    $return_empty_buttons = false;
+    }
+
+    if($return_empty_buttons) {
+        exit(json_encode(['btns' => ''])); die;
+    }
+
 	ob_start();
 
 	if ( XmlExportEngine::$is_auto_generate_enabled ):
 	?>
     <div class="wpallexport-free-edition-notice" id="migrate-orders-notice" style="padding: 20px; margin-bottom: 10px; display: none;">
-        <a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707173&edd_options%5Bprice_id%5D=1&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=migrate-orders"><?php _e('Upgrade to the Pro edition of WP All Export to Migrate Orders', PMXE_Plugin::LANGUAGE_DOMAIN);?></a>
-        <p><?php _e('If you already own it, remove the free edition and install the Pro edition.', PMXE_Plugin::LANGUAGE_DOMAIN);?></p>
+        <p><?php _e('The WooCoommerce Export Package is Required to Migrate Orders.', PMXE_Plugin::LANGUAGE_DOMAIN);?></p><br/>
+        <a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=4206899&edd_options%5Bprice_id%5D=1&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=migrate-orders"><?php _e('Purchase the WooCommerce Export Package', PMXE_Plugin::LANGUAGE_DOMAIN);?></a>
     </div>
+
+    <div class="wpallexport-free-edition-notice" id="migrate-products-notice" style="padding: 20px; margin-bottom: 10px; display: none;">
+        <p><?php _e('The WooCoommerce Export Package is Required to Migrate Products.', PMXE_Plugin::LANGUAGE_DOMAIN);?></p><br/>
+        <a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=4206899&edd_options%5Bprice_id%5D=1&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=migrate-products"><?php _e('Purchase the WooCommerce Export Package', PMXE_Plugin::LANGUAGE_DOMAIN);?></a>
+    </div>
+
+
+        <?php
+        if($addons->isUserAddonActive() && PMUE_EDITION == 'paid') {
+            ?>
+            <input type="hidden" id="user_add_on_pro_installed" value="1" />
+            <?php
+        }
+        ?>
+
+        <?php
+        if($addons->isWooCommerceAddonActive()) {
+            ?>
+            <input type="hidden" id="woocommerce_add_on_pro_installed" value="1" />
+            <?php
+        }
+        ?>
 
         <div class="wpallexport-free-edition-notice" id="migrate-users-notice" style="padding: 20px; margin-bottom: 10px; display: none;">
             <a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707173&edd_options%5Bprice_id%5D=1&utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=migrate-users"><?php _e('Upgrade to the Pro edition of WP All Export to Migrate Users', PMXE_Plugin::LANGUAGE_DOMAIN);?></a>

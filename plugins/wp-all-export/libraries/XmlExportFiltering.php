@@ -42,18 +42,6 @@ if ( ! class_exists('XmlExportFiltering') )
 				$this->queryJoin = array();
 
 				$this->queryWhere = " $wpdb->posts.post_type = 'product' AND (($wpdb->posts.post_status <> 'trash' AND $wpdb->posts.post_status <> 'auto-draft'))";												
-				
-//				$where = $this->queryWhere;
-//				$join  = implode( ' ', array_unique( $this->queryJoin ) );
-//
-//				$this->queryWhere = $tmp_queryWhere;
-//				$this->queryJoin  = $tmp_queryJoin;
-//
-//				$this->queryWhere .= " AND $wpdb->posts.post_type = 'product' OR ($wpdb->posts.post_type = 'product_variation' AND $wpdb->posts.post_parent IN (
-//					SELECT DISTINCT $wpdb->posts.ID
-//					FROM $wpdb->posts $join
-//					WHERE $where
-//				)) GROUP BY $wpdb->posts.ID";
 
 				$where = $this->queryWhere;
 				$join  = implode( ' ', array_unique( $this->queryJoin ) );

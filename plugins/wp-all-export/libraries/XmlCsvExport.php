@@ -41,10 +41,6 @@ final Class XmlCsvExport
 		$acfs 		= array();
 		$articles 	= array();
 
-//		self::$implode = (XmlExportEngine::$exportOptions['delimiter'] == ',') ? '|' : ',';
-//
-//        self::$implode = apply_filters('wp_all_export_implode_delimiter', self::$implode, XmlExportEngine::$exportID);
-
 		// [ Exporting requested data ]
 
 		if ( XmlExportEngine::$is_user_export )  { // exporting WordPress users
@@ -91,7 +87,7 @@ final Class XmlCsvExport
                 if (!$preview) do_action('pmxe_exported_post', $record->ID, XmlExportEngine::$exportRecord);
             }
 
-			wp_reset_postdata();									
+			wp_reset_postdata();
         }
 		// [ \Exporting requested data ]		
 
@@ -504,11 +500,15 @@ final Class XmlCsvExport
 		switch (XmlExportEngine::$exportOptions['cc_type'][$ID]) 
 		{					
 			case 'woo':
-				XmlExportEngine::$woo_export->get_element_header( $headers, XmlExportEngine::$exportOptions, $ID );
+			    if(XmlExportEngine::$woo_export) {
+                    XmlExportEngine::$woo_export->get_element_header($headers, XmlExportEngine::$exportOptions, $ID);
+                }
 				break;
 
 			case 'woo_order':
-				XmlExportEngine::$woo_order_export->get_element_header( $headers, XmlExportEngine::$exportOptions, $ID );
+			    if(XmlExportEngine::$woo_order_export) {
+                    XmlExportEngine::$woo_order_export->get_element_header($headers, XmlExportEngine::$exportOptions, $ID);
+                }
 				break;
 
 			case 'acf':
@@ -761,7 +761,7 @@ final Class XmlCsvExport
         foreach ($available_sections as $slug => $section) {
             if (!empty($section['content']) and !empty($available_data[$section['content']])) {
                 foreach ($available_data[$section['content']] as $field) {
-                    if (is_array($field) and (isset($field['auto']) or !in_array('product', $post['cpt']))) {
+                    if (is_array($field) and (isset($field['auto']) or (!in_array('product', $post['cpt']) || !\class_exists('WooCommerce')))) {
                         $auto_generate['ids'][] = 1;
                         $auto_generate['cc_label'][] = is_array($field) ? $field['label'] : $field;
                         $auto_generate['cc_php'][] = 0;
@@ -809,7 +809,13 @@ final Class XmlCsvExport
             }
         }
 
-        if (XmlExportWooCommerceOrder::$is_active) {
+        if (
+            (
+                XmlExportEngine::get_addons_service()->isWooCommerceAddonActive() ||
+            XmlExportEngine::get_addons_service()->isWooCommerceOrderAddonActive()
+            )
+            && XmlExportWooCommerceOrder::$is_active) {
+
             foreach (XmlExportWooCommerceOrder::$order_sections as $slug => $section) {
                 if (!empty($section['meta'])) {
                     foreach ($section['meta'] as $cur_meta_key => $field) {
@@ -828,7 +834,7 @@ final Class XmlCsvExport
             }
         }
 
-        if (!XmlExportEngine::$is_comment_export) XmlExportEngine::$acf_export->auto_generate_export_fields($auto_generate);
+        if (XmlExportEngine::get_addons_service()->isAcfAddonActive() && !XmlExportEngine::$is_comment_export) XmlExportEngine::$acf_export->auto_generate_export_fields($auto_generate);
 
         return $auto_generate;
     }
